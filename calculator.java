@@ -15,7 +15,16 @@ public class calculator{
         double product = num1 * num2;
         System.out.println("Multiplication: " + product);
 
+        // Modulus
+        double modulus = num1 % num2;
+        System.out.println("Modulus: " + modulus);
+
+        // Exponentiation
+        double exponentiation = Math.pow(num1, num2);
+        System.out.println("Exponentiation: " + exponentiation);
+
         // Division
+
         if (num2 != 0) {
             double quotient = num1 / num2;
             System.out.println("Division: " + quotient);
