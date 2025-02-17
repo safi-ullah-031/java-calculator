@@ -1,57 +1,121 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class Calculator {
+public class calculator {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.print("Enter first number: ");
-        double num1 = scanner.nextDouble();
-        
-        System.out.print("Enter second number: ");
-        double num2 = scanner.nextDouble();
+        while (true) {
+            try {
+                System.out.println("\nWhat calculation do you want to perform?");
+                System.out.println("1. Addition");
+                System.out.println("2. Subtraction");
+                System.out.println("3. Multiplication");
+                System.out.println("4. Division");
+                System.out.println("5. Modulus");
+                System.out.println("6. Exponentiation");
+                System.out.println("7. Square Root");
+                System.out.println("8. Trigonometric Functions (sin, cos, tan)");
+                System.out.println("9. Factorial");
+                System.out.println("10. GCD (Greatest Common Divisor)");
+                System.out.println("11. Exit");
+                System.out.print("Enter your choice: ");
 
-        // Addition
-        System.out.println("Addition: " + (num1 + num2));
+                int choice = scanner.nextInt();
 
-        // Subtraction
-        System.out.println("Subtraction: " + (num1 - num2));
+                if (choice == 11) {
+                    System.out.println("Exiting the calculator. Goodbye!");
+                    break;
+                }
 
-        // Multiplication
-        System.out.println("Multiplication: " + (num1 * num2));
+                double num1 = 0, num2 = 0;
+                if (choice >= 1 && choice <= 6 || choice == 10) {
+                    num1 = getValidNumber(scanner, "Enter the first number: ");
+                    num2 = getValidNumber(scanner, "Enter the second number: ");
+                } else if (choice == 7) {
+                    num1 = getValidNumber(scanner, "Enter a number to find its square root: ");
+                } else if (choice == 8) {
+                    num1 = getValidNumber(scanner, "Enter an angle in degrees: ");
+                } else if (choice == 9) {
+                    num1 = getValidNumber(scanner, "Enter a number to find its factorial: ");
+                }
 
-        // Division
-        if (num2 != 0) {
-            System.out.println("Division: " + (num1 / num2));
-        } else {
-            System.out.println("Division by zero is not allowed.");
+                switch (choice) {
+                    case 1:
+                        System.out.println("Result: " + (num1 + num2));
+                        break;
+                    case 2:
+                        System.out.println("Result: " + (num1 - num2));
+                        break;
+                    case 3:
+                        System.out.println("Result: " + (num1 * num2));
+                        break;
+                    case 4:
+                        if (num2 != 0) {
+                            System.out.println("Result: " + (num1 / num2));
+                        } else {
+                            System.out.println("Error: Division by zero is not allowed.");
+                        }
+                        break;
+                    case 5:
+                        if (num2 != 0) {
+                            System.out.println("Result: " + (num1 % num2));
+                        } else {
+                            System.out.println("Error: Modulus by zero is not allowed.");
+                        }
+                        break;
+                    case 6:
+                        System.out.println("Result: " + Math.pow(num1, num2));
+                        break;
+                    case 7:
+                        if (num1 >= 0) {
+                            System.out.println("Square root of " + num1 + " is: " + Math.sqrt(num1));
+                        } else {
+                            System.out.println("Error: Square root of negative numbers is not allowed.");
+                        }
+                        break;
+                    case 8:
+                        System.out.println("sin(" + num1 + "°): " + Math.sin(Math.toRadians(num1)));
+                        System.out.println("cos(" + num1 + "°): " + Math.cos(Math.toRadians(num1)));
+                        System.out.println("tan(" + num1 + "°): " + Math.tan(Math.toRadians(num1)));
+                        break;
+                    case 9:
+                        if (num1 < 0) {
+                            System.out.println("Error: Factorial of a negative number is not defined.");
+                        } else {
+                            System.out.println("Factorial of " + (int) num1 + " is: " + factorial((int) num1));
+                        }
+                        break;
+                    case 10:
+                        System.out.println("GCD of " + (int) num1 + " and " + (int) num2 + " is: " + gcd((int) num1, (int) num2));
+                        break;
+                    default:
+                        System.out.println("Error: Invalid choice. Please select a valid option.");
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Error: Invalid input. Please enter a numeric value.");
+                scanner.next(); // Clear invalid input
+            }
         }
-
-        // Modulus
-        System.out.println("Modulus: " + (num1 % num2));
-
-        // Exponentiation
-        System.out.println("Exponentiation: " + Math.pow(num1, num2));
-
-        // Square root
-        System.out.println("Square root of first number: " + Math.sqrt(num1));
-        System.out.println("Square root of second number: " + Math.sqrt(num2));
-
-        // Trigonometric Functions
-        System.out.println("Sin(" + num1 + "): " + Math.sin(Math.toRadians(num1)));
-        System.out.println("Cos(" + num1 + "): " + Math.cos(Math.toRadians(num1)));
-        System.out.println("Tan(" + num1 + "): " + Math.tan(Math.toRadians(num1)));
-
-        // Factorial Calculation
-        System.out.println("Factorial of first number: " + factorial((int) num1));
-        System.out.println("Factorial of second number: " + factorial((int) num2));
-
-        // GCD Calculation
-        System.out.println("GCD of both numbers: " + gcd((int) num1, (int) num2));
-
         scanner.close();
     }
 
+    // Function to get a valid number from the user
+    public static double getValidNumber(Scanner scanner, String message) {
+        while (true) {
+            try {
+                System.out.print(message);
+                return scanner.nextDouble();
+            } catch (InputMismatchException e) {
+                System.out.println("Error: Please enter a valid numeric value.");
+                scanner.next(); // Clear invalid input
+            }
+        }
+    }
+
+    // Function to calculate factorial
     public static int factorial(int n) {
+        if (n < 0) return -1; // Factorial of negative numbers is not defined
         if (n == 0 || n == 1) return 1;
         int fact = 1;
         for (int i = 2; i <= n; i++) {
@@ -60,7 +124,10 @@ public class Calculator {
         return fact;
     }
 
+    // Function to calculate GCD
     public static int gcd(int a, int b) {
+        a = Math.abs(a);
+        b = Math.abs(b);
         while (b != 0) {
             int temp = b;
             b = a % b;
