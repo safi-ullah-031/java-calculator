@@ -18,18 +18,19 @@ public class calculator {
                 System.out.println("8. Trigonometric Functions (sin, cos, tan)");
                 System.out.println("9. Factorial");
                 System.out.println("10. GCD (Greatest Common Divisor)");
-                System.out.println("11. Exit");
+                System.out.println("11. Logarithm (Base 10)");
+                System.out.println("12. Exit");
                 System.out.print("Enter your choice: ");
 
                 int choice = scanner.nextInt();
 
-                if (choice == 11) {
+                if (choice == 12) {
                     System.out.println("Exiting the calculator. Goodbye!");
                     break;
                 }
 
                 double num1 = 0, num2 = 0;
-                if (choice >= 1 && choice <= 6 || choice == 10) {
+                if (choice >= 1 && choice <= 6 || choice == 10 || choice == 11) {
                     num1 = getValidNumber(scanner, "Enter the first number: ");
                     num2 = getValidNumber(scanner, "Enter the second number: ");
                 } else if (choice == 7) {
@@ -65,19 +66,27 @@ public class calculator {
                         }
                         break;
                     case 6:
-                        System.out.println("Result: " + Math.pow(num1, num2));
+                        if (num1 < 0 && num2 < 0) {
+                            System.out.println("Error: Negative base with negative exponent is not supported.");
+                        } else {
+                            System.out.println("Result: " + Math.pow(num1, num2));
+                        }
                         break;
                     case 7:
-                        if (num1 >= 0) {
-                            System.out.println("Square root of " + num1 + " is: " + Math.sqrt(num1));
-                        } else {
+                        if (num1 < 0) {
                             System.out.println("Error: Square root of negative numbers is not allowed.");
+                        } else {
+                            System.out.println("Square root of " + num1 + " is: " + Math.sqrt(num1));
                         }
                         break;
                     case 8:
-                        System.out.println("sin(" + num1 + "°): " + Math.sin(Math.toRadians(num1)));
-                        System.out.println("cos(" + num1 + "°): " + Math.cos(Math.toRadians(num1)));
-                        System.out.println("tan(" + num1 + "°): " + Math.tan(Math.toRadians(num1)));
+                        if (num1 > 360 || num1 < 0) {
+                            System.out.println("Error: Angle must be between 0° and 360°.");
+                        } else {
+                            System.out.println("sin(" + num1 + "°): " + Math.sin(Math.toRadians(num1)));
+                            System.out.println("cos(" + num1 + "°): " + Math.cos(Math.toRadians(num1)));
+                            System.out.println("tan(" + num1 + "°): " + Math.tan(Math.toRadians(num1)));
+                        }
                         break;
                     case 9:
                         if (num1 < 0) {
@@ -88,6 +97,13 @@ public class calculator {
                         break;
                     case 10:
                         System.out.println("GCD of " + (int) num1 + " and " + (int) num2 + " is: " + gcd((int) num1, (int) num2));
+                        break;
+                    case 11:
+                        if (num1 <= 0) {
+                            System.out.println("Error: Logarithm undefined for non-positive values.");
+                        } else {
+                            System.out.println("Logarithm of " + num1 + " is: " + Math.log10(num1));
+                        }
                         break;
                     default:
                         System.out.println("Error: Invalid choice. Please select a valid option.");
