@@ -1,23 +1,23 @@
-******Scientific Calculator using Java Programming******:
+***Scientific Calculator using Java Programming***
+This project is a simple scientific calculator developed using Java, demonstrating object-oriented programming techniques.
 
-This project is a simple scientific calculator developed using Java with object-oriented programming techniques.
+**Features**
+Simple Functions: Basic arithmetic operations like addition, subtraction, multiplication, division, power, and percentage.
+Trigonometric Functions: Sin, cos, tan, and their inverse functions.
+Exponential and Logarithmic Functions: Perform calculations involving exponentials and logarithms.
 
+**Classes and Structure**
+1. ScientificCalculator (Base Class)
+An abstract class defining the interface for all calculator functions.
 
-******Features******
+2. SimpleFunctions (Derived Class)
+Handles basic arithmetic operations: addition, subtraction, multiplication, division, modulus, and exponentiation.
 
-Simple Functions: Basic arithmetic operations like addition, subtraction, multiplication, division, power, and percentage. Trigonometric Functions: Sin, cos, tan, and their inverse functions. Exponential and Logarithmic Functions: Perform calculations involving exponentials and logarithms.
+3. TrigFunctions (Derived Class)
+Handles trigonometric operations such as sine, cosine, and tangent (including inverse functions).
 
+4. ExponentialFunctions (Derived Class)
+Handles exponential and logarithmic calculations like exponentiation, natural log (ln), and base-10 logarithm (log).
 
-******Classes and Structure******
-
-ScientificCalculator (Base Class): An abstract class defining the interface for all calculator functions. SimpleFunctions (Derived Class): Handles basic arithmetic operations. TrigFunctions (Derived Class): Handles trigonometric operations. ExponentialFunctions (Derived Class): Handles exponential and logarithmic calculations.
-
-
-******How to Use******
-
-Menu-Driven Interface: The calculator uses a text-based menu, where users can choose different operations. Input: Users can enter one or more values depending on the operation selected. Output: The calculation result is displayed after the operation is performed.
-
-
-******How to Compile and Run******
-
-To compile the program, use any Java Compiler.
+**License**
+This project is open-source and available for personal and educational purposes. You are free to modify and distribute it under the MIT license.
